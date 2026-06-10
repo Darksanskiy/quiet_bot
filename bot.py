@@ -3,45 +3,6 @@ Import json
 Import os
 Import random
 
-
-TOKEN = "8609555142:AAHYr6K8yvjaFrZHd712p-22MSailOljbqw"
-
-Bot = telebot.TeleBot(TOKEN)
-DATA_FILE = «places.json»
-
-Def load_places():
-    If os.path.exists(DATA_FILE):
-        With open(DATA_FILE, «r», encoding=»utf-8») as f:
-            Return json.load(f)
-    Return []
-
-Def save_places(places):
-    With open(DATA_FILE, «w», encoding=»utf-8») as f:
-        Json.dump(places, f, ensure_ascii=False, indent=2)
-
-Def main_keyboard():
-    Kb = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-    Kb.row(«🏔 Найти тихое место», «📝 Подтвердить»)
-    Kb.row(«➕ Добавить место», «📊 Статистика»)
-    Return kb
-
-@bot.message_handler(commands=['start'])
-Def start(message):
-    Bot.send_message(
-        Message.chat.id,
-        «🏔 *Тихий Алтай*\n\nВыбирайте действие на кнопках:»,
-        Parse_mode='Markdown',
-        Reply_markup=main_keyboard()
-    )
-
-@bot.message_handler(func=lambda m: m.text == «🏔 Найти тихое место»)
-Def find_place(message):
-    Places = load_places()
-    Good = [p for p in places if p.get('confirm', 0) > 0]
-    
-    If not good:
-        Bot.send_message(message.chat.id, «😔 Нет подтверждённых мест. Добавьте первым!»)
-        Return
     
     Selected = random.sample(good, min(3, len(good)))
     Answer = «🏔 *Где сейчас тихо:*\n\n»
