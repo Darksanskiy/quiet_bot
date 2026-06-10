@@ -4,7 +4,7 @@ Import os
 Import random
 
 
-TOKEN = «8609555142:AAHYr6K8yvjaFrZHd712p-22MSailOljbqw»
+TOKEN = "8609555142:AAHYr6K8yvjaFrZHd712p-22MSailOljbqw"
 
 Bot = telebot.TeleBot(TOKEN)
 DATA_FILE = «places.json»
